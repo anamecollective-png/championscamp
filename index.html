@@ -1,0 +1,1101 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mountain Mystery</title>
+<meta name="description" content="Mountain Mystery, tabără Champions Camps: 5 zile pentru copii de 9-13 ani, la o cabană din Bran. Trasee, jocuri pe echipe, mistere de rezolvat și supraveghere permanentă.">
+<meta name="theme-color" content="#14261c">
+<meta property="og:title" content="Mountain Mystery — Champions Camps">
+<meta property="og:description" content="Cinci zile de aventură, prietenii și mistere de rezolvat, pentru copii de 9-13 ani, la poalele Branului.">
+<meta property="og:site_name" content="Champions Camps">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="ro_RO">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700;9..144,900&family=Work+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --night:#0d1c14;
+    --forest-dark:#14261c;
+    --forest:#2f5233;
+    --forest-light:#4c7a52;
+    --parchment:#efe6d0;
+    --parchment-light:#f7f2e6;
+    --parchment-dim:rgba(247,242,230,0.78);
+    --wood:#6b4226;
+    --rust:#a63d40;
+    --gold:#d0a13a;
+    --gold-deep:#a87c1e;
+    --ink:#211b14;
+    --ink-soft:#4a4238;
+    --line-dark:rgba(247,242,230,0.14);
+    --line-light:rgba(33,27,20,0.12);
+    --radius:14px;
+    --max:1140px;
+    --header-h:88px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;scroll-padding-top:var(--header-h);}
+  body{
+    margin:0;
+    background:var(--parchment-light);
+    color:var(--ink);
+    font-family:"Work Sans",system-ui,-apple-system,sans-serif;
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  h1,h2,h3,.display{
+    font-family:"Fraunces","Iowan Old Style",Georgia,serif;
+    font-weight:700;
+    line-height:1.05;
+    letter-spacing:-0.015em;
+    color:var(--forest-dark);
+    margin:0;
+    text-wrap:balance;
+  }
+  .mono{font-family:"JetBrains Mono",ui-monospace,monospace;letter-spacing:0.02em;}
+  a{color:inherit;}
+  img{max-width:100%;display:block;}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 28px;}
+  section{padding:96px 0;}
+  @media(max-width:680px){section{padding:64px 0;}}
+  :focus-visible{outline:2px solid var(--gold);outline-offset:3px;border-radius:4px;}
+  .skip{
+    position:absolute;left:-9999px;top:0;z-index:200;
+    background:var(--gold);color:var(--ink);padding:10px 18px;
+    border-radius:0 0 8px 0;font-weight:600;text-decoration:none;
+  }
+  .skip:focus{left:0;}
+  .kicker{
+    font-family:"JetBrains Mono",monospace;font-size:0.78rem;
+    color:var(--rust);text-transform:uppercase;letter-spacing:0.1em;
+    margin-bottom:14px;display:block;
+  }
+
+  /* ---------- NAV ---------- */
+  header{
+    position:fixed;top:0;left:0;right:0;z-index:100;
+    padding:18px 0;
+    transition:background .35s ease, box-shadow .35s ease, padding .35s ease;
+  }
+  header .wrap{display:flex;align-items:center;justify-content:space-between;gap:20px;}
+  header.solid{
+    background:rgba(247,242,230,0.93);
+    -webkit-backdrop-filter:blur(10px);
+    backdrop-filter:blur(10px);
+    box-shadow:0 1px 0 rgba(33,27,20,0.08);
+    padding:12px 0;
+  }
+  .logo{
+    display:flex;align-items:center;gap:11px;
+    color:var(--parchment-light);
+    text-decoration:none;flex:none;
+  }
+  .logo svg{flex:none;}
+  .logo-text{display:flex;flex-direction:column;line-height:1.06;}
+  .logo-name{font-family:"Fraunces",Georgia,serif;font-weight:700;font-size:1.12rem;}
+  .logo-sub{
+    font-family:"JetBrains Mono",monospace;font-size:0.6rem;
+    letter-spacing:0.16em;text-transform:uppercase;
+    color:var(--gold);margin-top:4px;
+  }
+  header.solid .logo{color:var(--forest-dark);}
+  header.solid .logo-sub{color:var(--gold-deep);}
+  nav.links{display:flex;gap:26px;align-items:center;}
+  nav.links a{
+    text-decoration:none;font-weight:500;font-size:0.93rem;
+    color:var(--parchment-light);opacity:0.88;
+    transition:opacity .2s;white-space:nowrap;
+  }
+  header.solid nav.links a{color:var(--ink);}
+  nav.links a:hover{opacity:1;}
+  .btn{
+    display:inline-flex;align-items:center;gap:8px;
+    background:var(--rust);color:#fff !important;
+    padding:11px 22px;border-radius:999px;
+    text-decoration:none;font-weight:600;font-size:0.92rem;
+    font-family:"Work Sans",sans-serif;
+    border:none;cursor:pointer;
+    transition:transform .15s ease, box-shadow .15s ease;
+    box-shadow:0 4px 14px rgba(166,61,64,0.35);
+  }
+  .btn:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(166,61,64,0.4);}
+  nav.links a.btn{opacity:1;}
+  header.solid nav.links a.btn{color:#fff !important;}
+  .btn.ghost{
+    background:transparent;color:var(--parchment-light) !important;
+    border:1.5px solid rgba(247,242,230,0.5);box-shadow:none;
+  }
+  .btn.ghost:hover{border-color:var(--gold);box-shadow:none;}
+  .hamburger{
+    display:none;background:none;border:none;cursor:pointer;padding:8px;
+    border-radius:8px;
+  }
+  .hamburger span{
+    display:block;width:24px;height:2px;background:var(--parchment-light);
+    margin:5px 0;transition:transform .25s ease, opacity .2s ease;
+  }
+  header.solid .hamburger span{background:var(--forest-dark);}
+  .nav-close{
+    display:none;position:absolute;top:26px;right:26px;
+    background:none;border:none;cursor:pointer;padding:8px;border-radius:8px;
+    color:var(--parchment-light);
+  }
+  .nav-backdrop{
+    position:fixed;inset:0;z-index:90;background:rgba(13,28,20,0.55);
+    opacity:0;pointer-events:none;transition:opacity .3s ease;
+  }
+  .nav-backdrop.show{opacity:1;pointer-events:auto;}
+
+  @media(max-width:980px){
+    nav.links{
+      position:fixed;inset:0 0 0 auto;width:80%;max-width:330px;z-index:95;
+      background:var(--forest-dark);
+      flex-direction:column;align-items:flex-start;
+      padding:96px 32px 32px;gap:22px;
+      transform:translateX(101%);transition:transform .3s ease;
+      box-shadow:-14px 0 40px rgba(13,28,20,0.35);
+      overflow-y:auto;
+    }
+    nav.links.open{transform:translateX(0);}
+    nav.links a{color:var(--parchment-light) !important;font-size:1.05rem;}
+    .hamburger{display:block;}
+    .nav-close{display:block;}
+  }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative;overflow:hidden;
+    min-height:100svh;display:flex;align-items:center;
+    background:linear-gradient(180deg,#08120c 0%, var(--night) 38%, var(--forest-dark) 78%, #1b3524 100%);
+    padding:150px 0 260px;
+  }
+  #stars{position:absolute;inset:0;width:100%;height:100%;opacity:.85;pointer-events:none;}
+  .hero-moon{
+    position:absolute;top:16%;right:9%;width:78px;height:78px;border-radius:50%;
+    background:radial-gradient(circle at 35% 35%, #fdf6e0 0%, #ecdcae 55%, #d8c48c 100%);
+    box-shadow:0 0 70px 18px rgba(240,225,180,0.16);
+    pointer-events:none;
+  }
+  @media(max-width:680px){.hero-moon{width:54px;height:54px;top:12%;right:12%;}}
+  .hero-mountains{position:absolute;bottom:-1px;left:0;right:0;width:100%;line-height:0;pointer-events:none;}
+  .hero .wrap{position:relative;z-index:2;}
+  .camp-name{
+    display:flex;align-items:center;gap:16px;
+    font-family:"Fraunces",Georgia,serif;font-weight:700;
+    font-size:clamp(0.92rem,1.5vw,1.08rem);
+    letter-spacing:0.2em;text-transform:uppercase;
+    color:var(--gold);margin:0 0 18px;
+  }
+  .camp-name::after{
+    content:"";height:1px;flex:1;max-width:160px;
+    background:linear-gradient(90deg,var(--gold),rgba(208,161,58,0));
+  }
+  .eyebrow-strip{
+    display:flex;gap:10px 22px;flex-wrap:wrap;
+    font-family:"JetBrains Mono",monospace;font-size:0.76rem;
+    color:rgba(247,242,230,0.6);letter-spacing:0.08em;text-transform:uppercase;
+    margin:0 0 30px;
+  }
+  .eyebrow-strip span{display:flex;align-items:center;gap:8px;}
+  .eyebrow-strip span::before{content:"";width:5px;height:5px;background:var(--gold);border-radius:50%;flex:none;}
+  .hero h1{
+    color:var(--parchment-light);
+    font-size:clamp(2.3rem, 5.6vw, 4.4rem);
+    max-width:880px;
+    font-variation-settings:"opsz" 120;
+  }
+  .hero h1 em{color:var(--gold);font-style:normal;}
+  .hero p.lead{
+    color:var(--parchment-dim);
+    font-size:1.13rem;max-width:56ch;margin:24px 0 34px;
+  }
+  .hero-ctas{display:flex;gap:16px;flex-wrap:wrap;}
+
+  /* ---------- DESPRE ---------- */
+  .about-top{display:grid;grid-template-columns:1.05fr 1fr;gap:64px;align-items:start;}
+  @media(max-width:860px){.about-top{grid-template-columns:1fr;gap:28px;}}
+  .about-top h2{font-size:clamp(1.8rem,3.4vw,2.6rem);}
+  .about-photo{
+    width:100%;height:auto;display:block;
+    margin-top:30px;border-radius:var(--radius);
+    box-shadow:0 12px 32px rgba(33,27,20,0.18);
+  }
+  @media(max-width:860px){.about-photo{margin-top:24px;}}
+  .about-copy p{color:var(--ink-soft);font-size:1.05rem;margin:0 0 18px;max-width:62ch;}
+  .about-copy p:last-child{margin-bottom:0;}
+  .feature-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:56px;}
+  @media(max-width:760px){.feature-cards{grid-template-columns:1fr;}}
+  .feature-card{
+    background:var(--parchment);border-radius:var(--radius);
+    padding:28px 26px;border:1px solid var(--line-light);
+  }
+  .feature-card .icon{
+    width:44px;height:44px;border-radius:10px;background:var(--forest-dark);
+    display:flex;align-items:center;justify-content:center;margin-bottom:18px;
+  }
+  .feature-card h3{font-size:1.15rem;margin-bottom:8px;}
+  .feature-card p{color:var(--ink-soft);font-size:0.95rem;margin:0;}
+
+  /* ---------- PENTRU CINE ---------- */
+  .audience{background:var(--parchment);}
+  .audience-grid{display:grid;grid-template-columns:0.85fr 1.15fr;gap:56px;align-items:center;}
+  @media(max-width:860px){.audience-grid{grid-template-columns:1fr;gap:28px;}}
+  .age-plate{
+    background:var(--forest-dark);border-radius:var(--radius);
+    padding:38px 32px;color:var(--parchment-light);
+  }
+  .age-plate .num{
+    font-family:"Fraunces",Georgia,serif;font-weight:700;
+    font-size:clamp(2.8rem,6vw,3.9rem);color:var(--gold);
+    line-height:1;font-variant-numeric:tabular-nums;
+    font-variation-settings:"opsz" 144;
+  }
+  .age-plate .num span{font-size:1.1rem;color:var(--parchment-dim);font-family:"Work Sans",sans-serif;display:block;margin-top:10px;letter-spacing:0.02em;}
+  .age-plate p{margin:22px 0 0;font-size:0.95rem;color:var(--parchment-dim);border-top:1px solid var(--line-dark);padding-top:20px;}
+  .audience-copy p{color:var(--ink-soft);font-size:1.05rem;margin:0 0 18px;max-width:62ch;}
+  .audience-copy p:last-child{margin-bottom:0;}
+  .audience-copy strong{color:var(--ink);font-weight:600;}
+
+  /* ---------- PROGRAM ---------- */
+  .program{background:var(--forest-dark);position:relative;padding-bottom:150px;}
+  .program .kicker{color:var(--gold);}
+  .program h2{color:var(--parchment-light);}
+  .program-head{max-width:640px;margin-bottom:54px;}
+  .program-head p{color:var(--parchment-dim);margin-top:16px;}
+  .trail-wrap{position:relative;}
+  .day-tabs{
+    display:flex;gap:0;overflow-x:auto;margin-bottom:44px;
+    border-bottom:1px solid var(--line-dark);
+    scrollbar-width:thin;
+  }
+  .day-tab{
+    position:relative;flex:none;background:none;border:none;cursor:pointer;
+    padding:14px 22px 22px;font-family:"JetBrains Mono",monospace;
+    color:rgba(247,242,230,0.55);font-size:0.85rem;
+    white-space:nowrap;transition:color .2s;
+  }
+  .day-tab::after{
+    content:"";position:absolute;bottom:-5px;left:50%;transform:translateX(-50%);
+    width:9px;height:9px;border-radius:50%;
+    background:var(--forest-dark);border:1.5px solid rgba(247,242,230,0.35);
+    transition:background .2s, border-color .2s, box-shadow .2s;
+  }
+  .day-tab:hover{color:rgba(247,242,230,0.85);}
+  .day-tab[aria-selected="true"]{color:var(--gold);}
+  .day-tab[aria-selected="true"]::after{
+    background:var(--gold);border-color:var(--gold);
+    box-shadow:0 0 0 4px rgba(208,161,58,0.18);
+  }
+  .day-panel{display:none;grid-template-columns:0.75fr 1.25fr;gap:48px;}
+  .day-panel.active{display:grid;}
+  @media(max-width:760px){.day-panel.active{grid-template-columns:1fr;gap:18px;}}
+  .day-num{
+    font-family:"Fraunces",Georgia,serif;font-size:4rem;color:var(--gold);
+    font-weight:700;line-height:1;font-variation-settings:"opsz" 144;
+  }
+  .day-title{color:var(--parchment-light);font-size:1.3rem;margin-top:8px;}
+  .day-note{color:rgba(247,242,230,0.55);font-size:0.9rem;margin-top:12px;max-width:34ch;}
+  .day-list{list-style:none;margin:0;padding:0;}
+  .day-list li{
+    color:rgba(247,242,230,0.86);padding:13px 0;
+    border-bottom:1px solid rgba(247,242,230,0.1);
+    display:flex;gap:18px;font-size:0.98rem;
+  }
+  .day-list li:last-child{border-bottom:none;}
+  .day-list li .t{
+    font-family:"JetBrains Mono",monospace;color:var(--gold);
+    flex:none;width:104px;font-size:0.8rem;padding-top:4px;
+    font-variant-numeric:tabular-nums;line-height:1.35;
+  }
+  @media(max-width:520px){
+    .day-list li{flex-direction:column;gap:5px;}
+    .day-list li .t{width:auto;padding-top:0;}
+  }
+  .trail-svg{position:absolute;bottom:-1px;left:0;right:0;width:100%;display:block;line-height:0;pointer-events:none;}
+
+  /* ---------- PULL QUOTE ---------- */
+  .pullquote{background:var(--parchment-light);padding:78px 0;}
+  .pullquote blockquote{
+    margin:0;max-width:820px;
+    font-family:"Fraunces",Georgia,serif;font-weight:700;
+    font-size:clamp(1.5rem,3.2vw,2.2rem);
+    line-height:1.18;color:var(--forest-dark);text-wrap:balance;
+  }
+  .pullquote blockquote span{color:var(--gold-deep);}
+  .pullquote .attrib{
+    font-family:"JetBrains Mono",monospace;font-size:0.76rem;
+    text-transform:uppercase;letter-spacing:0.14em;color:var(--ink-soft);
+    margin-top:22px;display:block;
+  }
+
+  /* ---------- CE INCLUDE ---------- */
+  .includes{background:var(--parchment);}
+  .includes-head{max-width:620px;}
+  .includes-head p{color:var(--ink-soft);margin-top:16px;}
+  .includes-grid{
+    display:grid;grid-template-columns:repeat(2,1fr);
+    gap:0 48px;margin:44px 0 0;padding:0;list-style:none;
+  }
+  @media(max-width:760px){.includes-grid{grid-template-columns:1fr;gap:0;}}
+  .includes-grid li{
+    list-style:none;display:flex;gap:14px;align-items:flex-start;
+    padding:15px 0;border-bottom:1px solid var(--line-light);
+    font-size:1rem;color:var(--ink);
+  }
+  .includes-grid li::before{
+    content:"✓";color:var(--gold-deep);font-weight:700;flex:none;
+    line-height:1.5;
+  }
+  .includes-note{
+    margin:36px 0 0;padding:22px 26px;border-radius:var(--radius);
+    background:var(--forest-dark);color:var(--parchment-light);
+    font-size:1rem;max-width:760px;
+  }
+  .includes-note strong{color:var(--gold);font-weight:600;}
+
+  /* ---------- SIGURANTA ---------- */
+  .safety{background:var(--forest-dark);color:var(--parchment-dim);}
+  .safety .kicker{color:var(--gold);}
+  .safety h2{color:var(--parchment-light);}
+  .safety-grid{display:grid;grid-template-columns:0.9fr 1.1fr;gap:56px;align-items:start;}
+  @media(max-width:860px){.safety-grid{grid-template-columns:1fr;gap:30px;}}
+  .safety-points{display:flex;flex-direction:column;gap:26px;margin-top:6px;}
+  .safety-point{display:flex;gap:18px;align-items:flex-start;}
+  .safety-point .icon{
+    width:38px;height:38px;border-radius:9px;flex:none;
+    background:rgba(208,161,58,0.13);border:1px solid rgba(208,161,58,0.3);
+    display:flex;align-items:center;justify-content:center;
+  }
+  .safety-point h3{color:var(--parchment-light);font-size:1.05rem;margin-bottom:6px;}
+  .safety-point p{margin:0;font-size:0.96rem;color:var(--parchment-dim);max-width:56ch;}
+
+  /* ---------- ECHIPA ---------- */
+  .team-head{max-width:640px;}
+  .team-grid{
+    display:grid;grid-template-columns:repeat(3,1fr);
+    gap:30px 26px;margin-top:50px;align-items:start;
+  }
+  @media(max-width:900px){.team-grid{grid-template-columns:repeat(2,1fr);}}
+  @media(max-width:560px){.team-grid{grid-template-columns:1fr;}}
+  .team-card{
+    text-align:center;background:var(--parchment);
+    border:1px solid var(--line-light);border-radius:var(--radius);
+    padding:28px 24px 24px;
+  }
+  .avatar-wrap{
+    position:relative;width:116px;height:116px;margin:0 auto 18px;
+    border-radius:50%;overflow:hidden;
+    box-shadow:0 6px 18px rgba(33,27,20,0.16);
+  }
+  .avatar-fallback{
+    position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+    font-family:"Fraunces",Georgia,serif;font-weight:700;font-size:1.7rem;color:#fff;
+  }
+  .avatar-photo{
+    position:relative;width:100%;height:100%;
+    object-fit:cover;object-position:center;border-radius:50%;
+  }
+  .team-card h3{font-size:1.1rem;}
+  .reveal-btn{
+    margin-top:14px;background:none;border:none;cursor:pointer;
+    font-family:"Work Sans",sans-serif;font-size:0.88rem;font-weight:600;
+    color:var(--forest);padding:8px 6px;border-radius:7px;
+    display:inline-flex;align-items:center;gap:7px;
+    transition:color .2s ease;
+  }
+  .reveal-btn:hover{color:var(--gold-deep);}
+  .reveal-arrow{font-size:0.95rem;line-height:1;}
+  .bio-wrap{display:grid;grid-template-rows:0fr;transition:grid-template-rows .45s ease;}
+  .team-card.open .bio-wrap{grid-template-rows:1fr;}
+  .bio-inner{overflow:hidden;}
+  .bio-inner p{
+    margin:14px 0 0;padding-top:16px;border-top:1px solid var(--line-light);
+    text-align:left;font-size:0.9rem;line-height:1.62;color:var(--ink-soft);
+  }
+
+  /* ---------- PRETURI ---------- */
+  .pricing{background:var(--parchment);}
+  .price-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start;margin-top:50px;}
+  @media(max-width:860px){.price-grid{grid-template-columns:1fr;gap:40px;}}
+  .price-card{
+    background:var(--forest-dark);color:var(--parchment-light);
+    border-radius:var(--radius);padding:38px 34px;
+  }
+  .price-card .kicker{color:var(--gold);}
+  .price-card .amount{
+    font-family:"Fraunces",Georgia,serif;font-size:3rem;color:var(--gold);
+    margin:0 0 20px;line-height:1;font-variant-numeric:tabular-nums;
+  }
+  .price-card .amount span{font-size:1rem;color:var(--parchment-dim);font-family:"Work Sans",sans-serif;}
+  .price-card ul{list-style:none;padding:0;margin:0;}
+  .price-card li{
+    padding:9px 0;border-bottom:1px solid rgba(247,242,230,0.12);
+    font-size:0.95rem;display:flex;gap:10px;
+  }
+  .price-card li:last-child{border-bottom:none;}
+  .price-card li::before{content:"✓";color:var(--gold);font-weight:700;flex:none;}
+  .price-card .btn{width:100%;justify-content:center;margin-top:26px;}
+
+  form.contact-form{display:flex;flex-direction:column;gap:14px;}
+  form.contact-form input, form.contact-form textarea{
+    font-family:"Work Sans",sans-serif;font-size:0.98rem;
+    padding:13px 16px;border-radius:10px;border:1.5px solid rgba(33,27,20,0.18);
+    background:#fff;color:var(--ink);
+  }
+  form.contact-form input:focus, form.contact-form textarea:focus{
+    outline:none;border-color:var(--forest);box-shadow:0 0 0 3px rgba(47,82,51,0.14);
+  }
+  form.contact-form textarea{resize:vertical;min-height:110px;}
+  form.contact-form .btn{align-self:flex-start;}
+  .form-note{font-size:0.85rem;color:var(--ink-soft);margin:0;}
+  .form-status{
+    font-size:0.92rem;margin:0;padding:12px 14px;border-radius:10px;
+    background:rgba(47,82,51,0.1);border:1px solid rgba(47,82,51,0.25);
+    color:var(--forest);display:none;
+  }
+  .form-status.show{display:block;}
+
+  /* ---------- FOOTER ---------- */
+  footer{background:var(--forest-dark);color:var(--parchment-dim);padding:56px 0 28px;}
+  .footer-top{
+    display:flex;justify-content:space-between;flex-wrap:wrap;gap:32px;
+    padding-bottom:32px;border-bottom:1px solid var(--line-dark);
+  }
+  .footer-top .logo{color:var(--parchment-light);}
+  .footer-contact .kicker{color:var(--gold);}
+  .footer-contact p{margin:6px 0;font-size:0.95rem;}
+  .footer-contact a{text-decoration:none;}
+  .footer-contact a:hover{color:var(--gold);}
+  .footer-bottom{padding-top:22px;font-size:0.85rem;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;}
+
+  ::selection{background:var(--gold);color:var(--ink);}
+  .reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease, transform .6s ease;}
+  .reveal.in{opacity:1;transform:none;}
+  @media(prefers-reduced-motion:reduce){
+    .reveal{opacity:1;transform:none;transition:none;}
+    html{scroll-behavior:auto;}
+    .btn:hover{transform:none;}
+    nav.links{transition:none;}
+    .bio-wrap{transition:none;}
+  }
+</style>
+</head>
+<body>
+
+<a class="skip" href="#despre">Sari la conținut</a>
+
+<header id="siteHeader">
+  <div class="wrap">
+    <a href="#top" class="logo">
+      <svg width="30" height="30" viewBox="0 0 30 30" fill="none" aria-hidden="true"><path d="M15 3 L27 24 H3 Z" stroke="currentColor" stroke-width="2" fill="none"/><circle cx="15" cy="14" r="2" fill="currentColor"/></svg>
+      <span class="logo-text">
+        <span class="logo-name">Champions Camps</span>
+        <span class="logo-sub">Mountain Mystery</span>
+      </span>
+    </a>
+    <button class="hamburger" id="hamburger" aria-label="Deschide meniul" aria-expanded="false" aria-controls="navLinks"><span></span><span></span><span></span></button>
+    <nav class="links" id="navLinks" aria-label="Meniu principal">
+      <button class="nav-close" id="navClose" aria-label="Închide meniul">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 5 L19 19 M19 5 L5 19"/></svg>
+      </button>
+      <a href="#despre">Despre noi</a>
+      <a href="#program">Program</a>
+      <a href="#include">Ce include</a>
+      <a href="#siguranta">Siguranță</a>
+      <a href="#preturi">Prețuri</a>
+      <a href="#contact" class="btn">Înscrie-te</a>
+    </nav>
+  </div>
+</header>
+<div class="nav-backdrop" id="navBackdrop" hidden></div>
+
+<section class="hero" id="top">
+  <canvas id="stars" aria-hidden="true"></canvas>
+  <div class="hero-moon" aria-hidden="true"></div>
+  <svg class="hero-mountains" viewBox="0 0 1440 340" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <path d="M0,340 L0,180 L180,90 L340,210 L520,60 L720,190 L900,100 L1100,220 L1260,120 L1440,200 L1440,340 Z" fill="#1c3826"/>
+    <path d="M0,340 L0,240 L220,160 L420,260 L640,140 L860,250 L1080,170 L1260,260 L1440,210 L1440,340 Z" fill="#14261c"/>
+  </svg>
+  <div class="wrap">
+    <p class="camp-name">Mountain Mystery</p>
+    <h1>Cinci zile de <em>aventură</em>,<br>prietenii și mistere de dezlegat.</h1>
+    <p class="lead">Mountain Mystery nu este doar o tabără. Este o aventură pe care copiii o construiesc împreună, la poalele Branului — cu trasee, competiții între echipe, mistere de rezolvat și o echipă care îi are în grijă din prima zi până în ultima.</p>
+    <div class="eyebrow-strip">
+      <span>24-30 octombrie 2026</span>
+      <span>9-13 ani</span>
+      <span>5 zile</span>
+      <span>Bran, Brașov</span>
+    </div>
+    <div class="hero-ctas">
+      <a href="#program" class="btn">Vezi programul zilnic</a>
+      <a href="#contact" class="btn ghost">Trimite-ne un mesaj</a>
+    </div>
+  </div>
+</section>
+
+<section id="despre">
+  <div class="wrap">
+    <div class="about-top reveal">
+      <div>
+        <span class="kicker">Despre noi</span>
+        <h2>Munte, mister, prieteni noi. În fiecare zi, altă aventură.</h2>
+        <img class="about-photo" src="poze/copii-la-schi.jpg" alt="Grup de copii pe schiuri, aliniați pe pârtie lângă instructorul lor" width="1200" height="900" loading="lazy">
+      </div>
+      <div class="about-copy">
+        <p>Mountain Mystery a pornit din dorința de a crea pentru copii o experiență diferită de o tabără clasică — câteva zile în care aventura, prietenia, mișcarea și provocările devin parte din aceeași poveste.</p>
+        <p>Suntem o echipă unită de pasiunea pentru sport, munte și activități în aer liber. Experiența noastră ca monitori de schi ne-a oferit ocazia să lucrăm cu copii, să îi coordonăm și să îi încurajăm să își depășească limitele, păstrând în același timp un mediu organizat și atent supravegheat.</p>
+        <p>Am construit Mountain Mystery pornind de la lucrurile pe care și nouă ne-ar fi plăcut să le găsim într-o tabără: jocuri care chiar te provoacă, competiții între echipe, mistere de rezolvat, trasee, misiuni și momente care îi ajută pe copii să lege prietenii și să capete mai multă încredere în ei.</p>
+      </div>
+    </div>
+    <div class="feature-cards">
+      <div class="feature-card reveal">
+        <div class="icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#efe6d0" stroke-width="2" aria-hidden="true"><path d="M3 20 L10 6 L14 14 L17 9 L21 20 Z"/></svg></div>
+        <h3>Aventură reală, afară</h3>
+        <p>Trasee în natură cu opriri și provocări, drumeții, foc de tabără — natura din jurul Branului e terenul de joacă.</p>
+      </div>
+      <div class="feature-card reveal">
+        <div class="icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#efe6d0" stroke-width="2" aria-hidden="true"><circle cx="8" cy="9" r="3"/><circle cx="17" cy="9" r="3"/><path d="M2 20c0-3 3-5 6-5s6 2 6 5M13 20c0-2.5 2-4.5 5-4.5s5 2 5 4.5"/></svg></div>
+        <h3>Echipe, nu grupuri</h3>
+        <p>Echipe fixe din prima zi, fiecare cu numele, sloganul și steagul ei — punctaj pe tot parcursul taberei, până la premierea din ultima seară.</p>
+      </div>
+      <div class="feature-card reveal">
+        <div class="icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#efe6d0" stroke-width="2" aria-hidden="true"><path d="M12 3 L20 7 V13 C20 18 16.5 20.5 12 22 C7.5 20.5 4 18 4 13 V7 Z"/></svg></div>
+        <h3>Fiecare activitate are un scop</h3>
+        <p>Copiii sunt încurajați să comunice, să gândească strategic, să lucreze în echipă și să își descopere propriile puncte forte.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="audience" id="pentru-cine">
+  <div class="wrap">
+    <div class="audience-grid">
+      <div class="age-plate reveal">
+        <div class="num">9-13 <span>ani</span></div>
+        <p>Nu este nevoie de experiență sportivă sau de o pregătire specială — doar de curiozitate, energie și chef de aventură.</p>
+      </div>
+      <div class="audience-copy reveal">
+        <span class="kicker">Pentru cine este tabăra</span>
+        <h2>Pentru copiii care vor altceva decât o vacanță obișnuită.</h2>
+        <p style="margin-top:20px;">Mountain Mystery este dedicată copiilor care își doresc o experiență diferită, plină de aventură, prietenii noi și provocări.</p>
+        <p>Este potrivită atât pentru <strong>copiii energici și competitivi</strong>, cât și pentru <strong>cei mai timizi</strong>, care vor să capete mai multă încredere în ei și să se integreze într-un grup.</p>
+        <p>Pe parcursul celor 5 zile, copiii vor avea ocazia să lucreze în echipă, să își pună creativitatea și logica la încercare, să exploreze natura și, cel mai important, să se distreze și să creeze amintiri alături de oameni noi.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="program" id="program">
+  <div class="wrap">
+    <div class="program-head reveal">
+      <span class="kicker">Programul taberei</span>
+      <h2>5 zile, fiecare cu aventura ei</h2>
+      <p>Fiecare zi din Mountain Mystery combină activități în aer liber, excursii, jocuri de echipă, provocări și momente de relaxare.</p>
+    </div>
+
+    <div class="trail-wrap">
+      <div class="day-tabs" id="dayTabs" role="tablist" aria-label="Zilele taberei">
+        <button class="day-tab" role="tab" id="tab-1" aria-controls="panel-1" aria-selected="true" tabindex="0" data-day="1">Ziua 1 · Formarea echipelor</button>
+        <button class="day-tab" role="tab" id="tab-2" aria-controls="panel-2" aria-selected="false" tabindex="-1" data-day="2">Ziua 2 · Mountain Quest</button>
+        <button class="day-tab" role="tab" id="tab-3" aria-controls="panel-3" aria-selected="false" tabindex="-1" data-day="3">Ziua 3 · Mystery Day</button>
+        <button class="day-tab" role="tab" id="tab-4" aria-controls="panel-4" aria-selected="false" tabindex="-1" data-day="4">Ziua 4 · Marea Finală</button>
+        <button class="day-tab" role="tab" id="tab-5" aria-controls="panel-5" aria-selected="false" tabindex="-1" data-day="5">Ziua 5 · Încheierea</button>
+      </div>
+
+      <div class="day-panels">
+        <div class="day-panel active" role="tabpanel" id="panel-1" aria-labelledby="tab-1" data-day="1" tabindex="0">
+          <div>
+            <div class="day-num">01</div>
+            <div class="day-title">Formarea echipelor</div>
+            <p class="day-note">Ziua în care nimeni nu mai e străin: până seara, fiecare copil are o echipă, un slogan, un steag și primele puncte.</p>
+          </div>
+          <ul class="day-list">
+            <li><span class="t mono">la sosire</span> Cazarea și primele jocuri de cunoaștere</li>
+            <li><span class="t mono">după-amiaza</span> Formarea echipelor: fiecare își alege un nume, un slogan și își creează propriul steag</li>
+            <li><span class="t mono">după-amiaza</span> Primele jocuri și provocări de echipă</li>
+            <li><span class="t mono">seara</span> Copiii află că în ultima zi are loc un Talent Show — au toată tabăra la dispoziție ca să își pregătească momentul</li>
+          </ul>
+        </div>
+        <div class="day-panel" role="tabpanel" id="panel-2" aria-labelledby="tab-2" data-day="2" tabindex="0" hidden>
+          <div>
+            <div class="day-num">02</div>
+            <div class="day-title">Mountain Quest</div>
+            <p class="day-note">Ziua cea mai lungă pe picioare — un traseu cu mai multe opriri, fiecare cu proba ei.</p>
+          </div>
+          <ul class="day-list">
+            <li><span class="t mono">dimineața</span> Pornim într-un traseu în natură, cu mai multe opriri și provocări pentru fiecare echipă</li>
+            <li><span class="t mono">pe traseu</span> Probe, puzzle-uri și jocuri care pun accent pe comunicare, atenție și lucru în echipă</li>
+            <li><span class="t mono">seara</span> Foc de tabără și timp petrecut împreună</li>
+          </ul>
+        </div>
+        <div class="day-panel" role="tabpanel" id="panel-3" aria-labelledby="tab-3" data-day="3" tabindex="0" hidden>
+          <div>
+            <div class="day-num">03</div>
+            <div class="day-title">Excursie și Mystery Day</div>
+            <p class="day-note">Ziua în care copiii devin detectivi: un caz de rezolvat, cu indicii și probe.</p>
+          </div>
+          <ul class="day-list">
+            <li><span class="t mono">dimineața</span> Excursia la Vaci — o ieșire în afara locației și o schimbare de decor</li>
+            <li><span class="t mono">la întoarcere</span> Jocuri și competiții între echipe</li>
+            <li><span class="t mono">după-amiaza</span> Misterul Comorii: copiii devin detectivi și rezolvă un caz folosind indiciile și probele primite</li>
+            <li><span class="t mono">seara</span> Movie Night</li>
+          </ul>
+        </div>
+        <div class="day-panel" role="tabpanel" id="panel-4" aria-labelledby="tab-4" data-day="4" tabindex="0" hidden>
+          <div>
+            <div class="day-num">04</div>
+            <div class="day-title">Marea Finală</div>
+            <p class="day-note">Ziua cu miza cea mai mare: ieșirea specială, scena și premierea echipelor.</p>
+          </div>
+          <ul class="day-list">
+            <li><span class="t mono">la întoarcere</span> Talent Show — fiecare echipă își prezintă momentul pregătit pe parcursul taberei</li>
+            <li><span class="t mono">după-amiaza</span> Jocuri și timp liber</li>
+            <li><span class="t mono">seara</span> Petrecerea de final și premierea echipelor</li>
+          </ul>
+        </div>
+        <div class="day-panel" role="tabpanel" id="panel-5" aria-labelledby="tab-5" data-day="5" tabindex="0" hidden>
+          <div>
+            <div class="day-num">05</div>
+            <div class="day-title">Încheierea taberei</div>
+            <p class="day-note">O dimineață relaxată, fără grabă, înainte de întoarcerea acasă.</p>
+          </div>
+          <ul class="day-list">
+            <li><span class="t mono">dimineața</span> Micul dejun și strânsul lucrurilor</li>
+            <li><span class="t mono">înainte de plecare</span> Ultimele momente împreună, înainte de întoarcerea acasă</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <svg class="trail-svg" viewBox="0 0 1440 120" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <path d="M0,120 L0,72 L200,38 L430,86 L680,30 L920,80 L1180,36 L1440,74 L1440,120 Z" fill="#f7f2e6"/>
+  </svg>
+</section>
+
+<section class="pullquote">
+  <div class="wrap reveal">
+    <blockquote>Pentru ei va fi o aventură. <span>Pentru noi, fiecare zi are un plan.</span></blockquote>
+    <span class="attrib">Mai mult decât o tabără</span>
+  </div>
+</section>
+
+<section class="includes" id="include">
+  <div class="wrap">
+    <div class="includes-head reveal">
+      <span class="kicker">Ce este inclus</span>
+      <h2>În prețul taberei intră tot ce ține de cele 5 zile</h2>
+      <p>De la cazare și mese, până la bilete, materiale și premii — nimic din programul de mai sus nu se plătește separat.</p>
+    </div>
+    <ul class="includes-grid reveal">
+      <li>Cazarea pentru 4 nopți</li>
+      <li>3 mese pe zi</li>
+      <li>Excursiile și activitățile din program, inclusiv vizitele la Vaci și Alpin Coaster</li>
+      <li>Snack-urile și gustările pentru serile tematice</li>
+      <li>Apă și gustări pe parcursul activităților</li>
+      <li>Toate jocurile, competițiile și experiențele tematice din tabără</li>
+      <li>Materialele și echipamentele necesare pentru activități</li>
+      <li>Premii și surprize pregătite pentru copii</li>
+      <li>Drumețiile și activitățile în aer liber</li>
+      <li>Supravegherea și coordonarea copiilor pe întreaga perioadă</li>
+      <li>Fotografii și videoclipuri realizate pe parcursul experienței</li>
+    </ul>
+    <p class="includes-note reveal"><strong>Fără costuri suplimentare</strong> pentru activitățile incluse în program — vrem ca fiecare copil să se bucure de întreaga experiență Mountain Mystery.</p>
+  </div>
+</section>
+
+<section class="safety" id="siguranta">
+  <div class="wrap">
+    <div class="safety-grid">
+      <div class="reveal">
+        <span class="kicker">Siguranță și supraveghere</span>
+        <h2>Siguranța copiilor este prioritatea noastră pe întreaga durată a taberei.</h2>
+      </div>
+      <div class="safety-points reveal">
+        <div class="safety-point">
+          <div class="icon"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#d0a13a" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8v4l3 2"/></svg></div>
+          <div>
+            <h3>Supraveghere permanentă</h3>
+            <p>Participanții sunt supravegheați permanent de echipa noastră, atât în timpul activităților și excursiilor, cât și în momentele de pauză și pe durata șederii la cazare.</p>
+          </div>
+        </div>
+        <div class="safety-point">
+          <div class="icon"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#d0a13a" stroke-width="2" aria-hidden="true"><path d="M12 3 L20 7 V13 C20 18 16.5 20.5 12 22 C7.5 20.5 4 18 4 13 V7 Z"/></svg></div>
+          <div>
+            <h3>Oameni obișnuiți să lucreze cu copii</h3>
+            <p>Echipa este formată din persoane active, responsabile și obișnuite să lucreze cu copii, având experiență în coordonarea și supravegherea acestora prin activitatea de monitori de schi.</p>
+          </div>
+        </div>
+        <div class="safety-point">
+          <div class="icon"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#d0a13a" stroke-width="2" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h10"/></svg></div>
+          <div>
+            <h3>Reguli clare, potrivite cu vârsta</h3>
+            <p>Activitățile sunt organizate în funcție de vârsta participanților și se desfășoară după reguli clare de siguranță. Copiii nu părăsesc grupul sau locația fără acordul și însoțirea unui coordonator.</p>
+          </div>
+        </div>
+        <div class="safety-point">
+          <div class="icon"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#d0a13a" stroke-width="2" aria-hidden="true"><path d="M4 6c0 8 6 14 14 14l2-3-4-2-2 2c-2-1-4-3-5-5l2-2-2-4z"/></svg></div>
+          <div>
+            <h3>Un număr de contact, tot timpul</h3>
+            <p>Pe întreaga perioadă a taberei, părinții au la dispoziție un număr de contact pentru situații urgente și pentru comunicarea cu echipa de organizare.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="echipa">
+  <div class="wrap">
+    <div class="team-head reveal">
+      <span class="kicker">Cine organizează</span>
+      <h2>5 oameni, prezenți în fiecare zi</h2>
+    </div>
+    <div class="team-grid">
+      <div class="team-card reveal">
+        <div class="avatar-wrap">
+          <span class="avatar-fallback" style="background:var(--forest);" aria-hidden="true">ST</span>
+          <img class="avatar-photo" src="poze/sofia-tacu.jpg" alt="Sofia Tacu" width="500" height="500" loading="lazy">
+        </div>
+        <h3>Sofia Tacu</h3>
+        <button class="reveal-btn" type="button" aria-expanded="false" aria-controls="bio-sofia-tacu">
+          <span class="reveal-label">Află mai multe despre mine</span><span class="reveal-arrow" aria-hidden="true">↓</span>
+        </button>
+        <div class="bio-wrap" id="bio-sofia-tacu"><div class="bio-inner"><p>Sofia este monitor de schi în Poiana Brașov, având experiență constantă în lucrul cu copii și fiind obișnuită să îi coordoneze, să îi încurajeze și să creeze o relație bazată pe încredere și răbdare. Este absolventă a Colegiului Național de Informatică „Grigore Moisil” din Brașov și în prezent studentă la FABIZ – ASE București, Facultatea de Administrarea Afacerilor, unde își dezvoltă cunoștințele de management, organizare și antreprenoriat. Experiența sa ca fost membru Interact Kronstadt, alături de lucrul cu copiii și pregătirea în domeniul businessului, o ajută să contribuie atât la organizarea taberei, cât și la crearea unui mediu în care copiii să se simtă în siguranță, incluși și încurajați să se bucure de fiecare experiență.</p></div></div>
+      </div>
+      <div class="team-card reveal">
+        <div class="avatar-wrap">
+          <span class="avatar-fallback" style="background:var(--rust);" aria-hidden="true">MZ</span>
+          <img class="avatar-photo" src="poze/mihnea-zaharia.jpg" alt="Mihnea Zaharia" width="500" height="500" loading="lazy">
+        </div>
+        <h3>Mihnea Zaharia</h3>
+        <button class="reveal-btn" type="button" aria-expanded="false" aria-controls="bio-mihnea-zaharia">
+          <span class="reveal-label">Află mai multe despre mine</span><span class="reveal-arrow" aria-hidden="true">↓</span>
+        </button>
+        <div class="bio-wrap" id="bio-mihnea-zaharia"><div class="bio-inner"><p>Cu experiență de peste 2 ani ca instructor de schi, Mihnea este obișnuit să lucreze cu copii, să îi coordoneze și să se adapteze diferitelor personalități și niveluri de vârstă. A participat de-a lungul timpului și la tabere de schi, cunoscând din interior atât dinamica unui grup de copii, cât și responsabilitatea pe care o presupune supravegherea acestora. Este absolvent al Colegiului Național „Johannes Honterus” din Brașov, vorbește fluent limba germană și este în prezent student la Facultatea de Matematică și Informatică. Implicarea sa ca fost membru Interact Brașov i-a oferit, de asemenea, experiență în lucrul în echipă, organizarea de proiecte și asumarea responsabilităților. În cadrul taberei, Mihnea se ocupă atât de organizarea și coordonarea activităților, cât și de crearea unui mediu în care copiii să se simtă în siguranță, integrați în grup și încurajați să participe.</p></div></div>
+      </div>
+      <div class="team-card reveal">
+        <div class="avatar-wrap">
+          <span class="avatar-fallback" style="background:var(--gold-deep);" aria-hidden="true">AC</span>
+          <img class="avatar-photo" src="poze/amalia-cirica.jpg" alt="Amalia Cirica" width="500" height="500" loading="lazy">
+        </div>
+        <h3>Amalia Cirica</h3>
+        <button class="reveal-btn" type="button" aria-expanded="false" aria-controls="bio-amalia-cirica">
+          <span class="reveal-label">Află mai multe despre mine</span><span class="reveal-arrow" aria-hidden="true">↓</span>
+        </button>
+        <div class="bio-wrap" id="bio-amalia-cirica"><div class="bio-inner"><p>Amalia a lucrat ca animatoare pentru copii la Alpin Magic Land, unde a deprins arta de a ține un grup de copii implicat, entuziasmat și în siguranță, indiferent de vârstă sau energie. Ca fostă membră Interact HR, alături de absolvirea Colegiului Național „Johannes Honterus” și studiile actuale la Drept, la UniTBV, Amalia aduce în tabără o combinație rară: energia unei animatoare cu experiență directă cu copiii și rigoarea unei gândiri structurate, atentă la detalii și la responsabilitate. În tabără, Amalia se ocupă de crearea acelor momente în care copiii uită de telefon și se bucură pur și simplu de joacă — cu răbdare, implicare și mereu un ochi la siguranța grupului.</p></div></div>
+      </div>
+      <div class="team-card reveal">
+        <div class="avatar-wrap">
+          <span class="avatar-fallback" style="background:var(--wood);" aria-hidden="true">DN</span>
+          <img class="avatar-photo" src="poze/darius-nica.jpg" alt="Darius Nica" width="500" height="500" loading="lazy">
+        </div>
+        <h3>Darius Nica</h3>
+        <button class="reveal-btn" type="button" aria-expanded="false" aria-controls="bio-darius-nica">
+          <span class="reveal-label">Află mai multe despre mine</span><span class="reveal-arrow" aria-hidden="true">↓</span>
+        </button>
+        <div class="bio-wrap" id="bio-darius-nica"><div class="bio-inner"><p>Darius este instructor de snowboard și mountain bike, cu experiență în lucrul și coordonarea grupelor de copii. Susține activități sportive pentru copii, fiind obișnuit să pună accent pe răbdare, încurajare și siguranță. Este absolvent al Colegiului Național „Johannes Honterus”, vorbește limba germană și este student la Facultatea de Științe Economice, specializarea Turism. În tabără, Darius aduce experiență practică, energie și capacitatea de a le oferi copiilor încredere și curaj prin sport și activități de grup.</p></div></div>
+      </div>
+      <div class="team-card reveal">
+        <div class="avatar-wrap">
+          <span class="avatar-fallback" style="background:var(--forest-light);" aria-hidden="true">AG</span>
+          <img class="avatar-photo" src="poze/andrei-gligore.jpg" alt="Andrei Gligore" width="500" height="500" loading="lazy">
+        </div>
+        <h3>Andrei Gligore</h3>
+        <button class="reveal-btn" type="button" aria-expanded="false" aria-controls="bio-andrei-gligore">
+          <span class="reveal-label">Află mai multe despre mine</span><span class="reveal-arrow" aria-hidden="true">↓</span>
+        </button>
+        <div class="bio-wrap" id="bio-andrei-gligore"><div class="bio-inner"><p>Andi este monitor de schi, cu experiență constantă în lucrul cu copii — obișnuit să îi coordoneze, să le ofere încredere pe pârtie și să transforme fiecare lecție într-o experiență sigură și plăcută, indiferent de nivelul lor. Ca fost membru Interact HR, Andi are exercițiul organizării și al lucrului în echipă, alături de o înțelegere clară a ce înseamnă responsabilitate și implicare într-un proiect comun. În tabără, Andi aduce experiență practică pe zăpadă, răbdare cu cei mici și capacitatea de a crea un mediu în care copiii se simt încurajați să încerce lucruri noi, fără teamă.</p></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="pricing" id="preturi">
+  <div class="wrap">
+    <div class="reveal">
+      <span class="kicker">Înscriere &amp; preț</span>
+      <h2>Rezervă un loc pentru copilul tău</h2>
+    </div>
+    <div class="price-grid">
+      <div class="price-card reveal">
+        <div class="amount">1950 RON <span>/ copil</span></div>
+        <ul>
+          <li>Cazare și 3 mese pe zi</li>
+          <li>Toate excursiile: Vaci și Alpin Coaster</li>
+          <li>Toate jocurile, materialele și premiile</li>
+          <li>Transport dus-întors din [oraș]</li>
+          <li>Supraveghere pe întreaga perioadă</li>
+          <li>Fotografii și videoclipuri din tabără</li>
+        </ul>
+        <a href="#contact" class="btn">Rezervă un loc la Mountain Mystery</a>
+      </div>
+      <div id="contact" class="reveal">
+        <span class="kicker">Contact</span>
+        <h3 style="font-size:1.4rem;margin-bottom:8px;">Scrie-ne câteva rânduri</h3>
+        <p class="form-note" style="margin-bottom:18px;">Completezi câmpurile, iar mesajul se deschide gata scris în WhatsApp. Îți răspundem în maximum 24 de ore, cu toate detaliile despre locuri și plată.</p>
+        <form class="contact-form" id="campForm">
+          <input type="text" name="nume" placeholder="Numele tău" autocomplete="name" required>
+          <input type="text" name="copil" placeholder="Numele și vârsta copilului" required>
+          <input type="email" name="email" placeholder="Adresa de email" autocomplete="email" required>
+          <input type="tel" name="telefon" placeholder="Telefon (opțional)" autocomplete="tel">
+          <textarea name="mesaj" placeholder="Întrebări sau observații (opțional)"></textarea>
+          <button type="submit" class="btn">Trimite pe WhatsApp</button>
+          <p class="form-status" id="formStatus" role="status"></p>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-top">
+      <div>
+        <a href="#top" class="logo">
+          <svg width="26" height="26" viewBox="0 0 30 30" fill="none" aria-hidden="true"><path d="M15 3 L27 24 H3 Z" stroke="currentColor" stroke-width="2" fill="none"/><circle cx="15" cy="14" r="2" fill="currentColor"/></svg>
+          <span class="logo-text">
+            <span class="logo-name">Champions Camps</span>
+            <span class="logo-sub">Mountain Mystery</span>
+          </span>
+        </a>
+        <p style="max-width:300px;margin-top:14px;font-size:0.9rem;">Mountain Mystery e tabăra Champions Camps de la poalele Branului: 5 zile pentru copii de 9-13 ani, la o cabană în Bran.</p>
+      </div>
+      <div class="footer-contact">
+        <span class="kicker">Contact</span>
+        <p><a href="mailto:champions.camp123@gmail.com" id="footerEmail">[champions.camp123@gmail.com]</a></p>
+        <p><a href="tel:0723510141" class="footer-phone">0723 510 141</a></p>
+        <p><a href="tel:0724336400" class="footer-phone">0724 336 400</a></p>
+        <p>Bran, jud. Brașov</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Champions Camps. Toate drepturile rezervate.</span>
+      <span>Pagină realizată de organizatori, cu drag.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+
+  /* Un singur loc de editat pentru datele de contact. */
+  var CONTACT = {
+    email: "champions.camp123@gmail.com",
+    /* Pune aici cele doua numere. Daca lasi unul gol, randul lui dispare. */
+    phones: ["0723 510 141", "0724 336 400"],
+    /* Numarul pe care ajung mesajele din formular, format international, fara +. */
+    whatsapp: "40723510141"
+  };
+
+  var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  /* ---------- Header ---------- */
+  var header = document.getElementById("siteHeader");
+  var onScroll = function(){ header.classList.toggle("solid", window.scrollY > 40); };
+  window.addEventListener("scroll", onScroll, { passive:true });
+  onScroll();
+
+  /* ---------- Meniu mobil ---------- */
+  var hamburger = document.getElementById("hamburger");
+  var navLinks  = document.getElementById("navLinks");
+  var navClose  = document.getElementById("navClose");
+  var backdrop  = document.getElementById("navBackdrop");
+
+  function openNav(){
+    navLinks.classList.add("open");
+    hamburger.setAttribute("aria-expanded","true");
+    backdrop.hidden = false;
+    requestAnimationFrame(function(){ backdrop.classList.add("show"); });
+    navClose.focus();
+  }
+  function closeNav(focusBack){
+    navLinks.classList.remove("open");
+    hamburger.setAttribute("aria-expanded","false");
+    backdrop.classList.remove("show");
+    window.setTimeout(function(){ backdrop.hidden = true; }, 300);
+    if (focusBack) hamburger.focus();
+  }
+  hamburger.addEventListener("click", function(){
+    navLinks.classList.contains("open") ? closeNav(true) : openNav();
+  });
+  navClose.addEventListener("click", function(){ closeNav(true); });
+  backdrop.addEventListener("click", function(){ closeNav(false); });
+  navLinks.querySelectorAll("a").forEach(function(a){
+    a.addEventListener("click", function(){ closeNav(false); });
+  });
+  document.addEventListener("keydown", function(e){
+    if (e.key === "Escape" && navLinks.classList.contains("open")) closeNav(true);
+  });
+
+  /* ---------- Zilele programului ---------- */
+  var tabs   = Array.prototype.slice.call(document.querySelectorAll(".day-tab"));
+  var panels = Array.prototype.slice.call(document.querySelectorAll(".day-panel"));
+
+  function selectDay(index, moveFocus){
+    tabs.forEach(function(t, i){
+      var on = i === index;
+      t.setAttribute("aria-selected", on ? "true" : "false");
+      t.tabIndex = on ? 0 : -1;
+      if (on && moveFocus) t.focus();
+    });
+    panels.forEach(function(p, i){
+      var on = i === index;
+      p.classList.toggle("active", on);
+      p.hidden = !on;
+    });
+  }
+  tabs.forEach(function(tab, i){
+    tab.addEventListener("click", function(){ selectDay(i, false); });
+    tab.addEventListener("keydown", function(e){
+      var next = null;
+      if (e.key === "ArrowRight") next = (i + 1) % tabs.length;
+      else if (e.key === "ArrowLeft") next = (i - 1 + tabs.length) % tabs.length;
+      else if (e.key === "Home") next = 0;
+      else if (e.key === "End") next = tabs.length - 1;
+      if (next !== null){ e.preventDefault(); selectDay(next, true); }
+    });
+  });
+
+  /* ---------- Apariție la scroll ---------- */
+  var revealables = document.querySelectorAll(".reveal");
+  if (reduceMotion || !("IntersectionObserver" in window)){
+    revealables.forEach(function(el){ el.classList.add("in"); });
+  } else {
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if (e.isIntersecting){ e.target.classList.add("in"); io.unobserve(e.target); }
+      });
+    }, { threshold: 0.15 });
+    revealables.forEach(function(el){ io.observe(el); });
+  }
+
+  /* ---------- Cerul înstelat din hero ---------- */
+  var canvas = document.getElementById("stars");
+  if (canvas && canvas.getContext){
+    var ctx = canvas.getContext("2d");
+    var stars = [], w = 0, h = 0, raf = null, visible = true;
+
+    function build(){
+      var dpr = Math.min(window.devicePixelRatio || 1, 2);
+      var rect = canvas.getBoundingClientRect();
+      w = rect.width; h = rect.height;
+      canvas.width = Math.round(w * dpr);
+      canvas.height = Math.round(h * dpr);
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+      var count = Math.round((w * h) / 6200);
+      stars = [];
+      for (var i = 0; i < count; i++){
+        var y = Math.pow(Math.random(), 1.7) * h * 0.92;
+        stars.push({
+          x: Math.random() * w,
+          y: y,
+          r: Math.random() * 1.25 + 0.35,
+          a: Math.random() * 0.5 + 0.28,
+          s: Math.random() * 0.9 + 0.3,
+          p: Math.random() * Math.PI * 2
+        });
+      }
+    }
+    function draw(t){
+      ctx.clearRect(0, 0, w, h);
+      for (var i = 0; i < stars.length; i++){
+        var st = stars[i];
+        var fade = 1 - Math.min(st.y / (h * 0.95), 1) * 0.55;
+        var alpha = reduceMotion ? st.a : st.a + Math.sin(t / 1400 * st.s + st.p) * 0.22;
+        ctx.globalAlpha = Math.max(0.05, alpha * fade);
+        ctx.fillStyle = st.r > 1.2 ? "#f4ead0" : "#ffffff";
+        ctx.beginPath();
+        ctx.arc(st.x, st.y, st.r, 0, Math.PI * 2);
+        ctx.fill();
+      }
+      ctx.globalAlpha = 1;
+    }
+    function loop(t){ draw(t); raf = requestAnimationFrame(loop); }
+    function start(){ if (!raf && !reduceMotion) raf = requestAnimationFrame(loop); }
+    function stop(){ if (raf){ cancelAnimationFrame(raf); raf = null; } }
+
+    build(); draw(0); start();
+
+    var resizeTimer;
+    window.addEventListener("resize", function(){
+      window.clearTimeout(resizeTimer);
+      resizeTimer = window.setTimeout(function(){ build(); draw(performance.now()); }, 180);
+    });
+
+    if ("IntersectionObserver" in window){
+      new IntersectionObserver(function(entries){
+        visible = entries[0].isIntersecting;
+        visible ? start() : stop();
+      }, { threshold: 0 }).observe(canvas);
+    }
+    document.addEventListener("visibilitychange", function(){
+      document.hidden || !visible ? stop() : start();
+    });
+  }
+
+  /* ---------- Bio organizatori ---------- */
+  Array.prototype.forEach.call(document.querySelectorAll(".team-card"), function(card){
+    var btn   = card.querySelector(".reveal-btn");
+    var label = card.querySelector(".reveal-label");
+    var arrow = card.querySelector(".reveal-arrow");
+    if (!btn || !label || !arrow) return;
+    btn.addEventListener("click", function(){
+      var open = card.classList.toggle("open");
+      btn.setAttribute("aria-expanded", open ? "true" : "false");
+      label.textContent = open ? "Ascunde" : "Află mai multe despre mine";
+      arrow.textContent = open ? "\u2191" : "\u2193";
+    });
+  });
+
+  /* Daca o poza lipseste, ramane cercul cu initiale. */
+  Array.prototype.forEach.call(document.querySelectorAll(".avatar-photo"), function(img){
+    img.addEventListener("error", function(){ img.style.display = "none"; });
+  });
+
+  /* ---------- Formular de contact ---------- */
+  var footerEmail = document.getElementById("footerEmail");
+  if (footerEmail){ footerEmail.textContent = CONTACT.email; footerEmail.href = "mailto:" + CONTACT.email; }
+  Array.prototype.forEach.call(document.querySelectorAll(".footer-phone"), function(a, i){
+    var nr = (CONTACT.phones || [])[i];
+    if (nr){
+      a.textContent = nr;
+      a.href = "tel:" + nr.replace(/[^0-9+]/g, "");
+    } else if (a.parentNode && a.parentNode.parentNode){
+      a.parentNode.parentNode.removeChild(a.parentNode);
+    }
+  });
+
+  var form = document.getElementById("campForm");
+  var status = document.getElementById("formStatus");
+  form.addEventListener("submit", function(e){
+    e.preventDefault();
+    var f = new FormData(this);
+    var text = [
+      "Înscriere Mountain Mystery",
+      "",
+      "Nume părinte: " + (f.get("nume") || ""),
+      "Copil: " + (f.get("copil") || ""),
+      "Email: " + (f.get("email") || ""),
+      "Telefon: " + (f.get("telefon") || "—"),
+      "",
+      "Mesaj:",
+      (f.get("mesaj") || "—")
+    ].join("\n");
+
+    var url = "https://wa.me/" + CONTACT.whatsapp + "?text=" + encodeURIComponent(text);
+
+    status.textContent = "Se deschide WhatsApp cu mesajul completat — mai trebuie doar să apeși Trimite acolo. Dacă nu se deschide, scrie-ne la " + CONTACT.phones[0] + " sau la " + CONTACT.email + ".";
+    status.classList.add("show");
+
+    var w = window.open(url, "_blank", "noopener");
+    if (!w) window.location.href = url;
+  });
+})();
+</script>
+</body>
+</html>
